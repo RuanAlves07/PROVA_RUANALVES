@@ -66,7 +66,7 @@ $opcoes_menu = $permissoes[$id_perfil];
 </head>
     <body>
         <header>
-            
+
             <div class="saudacao">
                 <h2>Bem-Vindo, <?php echo $_SESSION["usuario"];?>! Permissão: <?php echo $nome_perfil;?></h2>
             </div>
@@ -78,5 +78,23 @@ $opcoes_menu = $permissoes[$id_perfil];
             </div>
 
         </header>
+
+        <nav>
+            <ul class="menu">
+                <?php foreach($opcoes_menu as $categoria=>$arquivos): ?>
+                <li class="dropdown">
+                    <a href="#"><?= $categoria ?></a>
+                    <ul class="dropdown-menu">
+                        <?php foreach($arquivos as $arquivo): ?>
+                        <li>
+                            <a href="><?= $arquivo ?>"><?= ucfirst(str_replace("_"," ",basename($arquivo,".php")))?></a>
+                        </li>
+                            <?php endforeach; ?>
+                    </ul>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+
     </body>
 </html>
