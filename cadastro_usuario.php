@@ -22,8 +22,50 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $stmt->bindParam(':id_perfil', $id_perfil);
     
     if($stmt->execute()){
-
+        echo "<script>alert('Usuário cadastrado com sucesso!')</script>";
+    } else {
+        echo "<script>alert('Erro ao cadastrar o usuário!')</script>";
     }
 }
 
+?>
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <body>
+        <h2>Cadastrar Usuário</h2>
+        <form action="cadastro_usuario.php" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <label for="id_perfil">Perfil:</label>
+            <select id="id_perfil" name="id_perfil">
+                <option value="1">Administrador</option>
+                <option value="2">Secretaria</option>
+                <option value="3">Almoxarife</option>
+                <option value="4">Cliente</option>
+            </select>
+
+            <button type="submit">Salvar</button>
+            <button type="reset">Cancelar</button>
+        </form>
+
+        <a href="principal.php">Voltar</a>
+    </body>
+</html>
+
+
+<!--
+Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1 in C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php:24 Stack trace: #0 C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php(24): PDOStatement->execute() #1 {main} thrown in C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php on line 24
