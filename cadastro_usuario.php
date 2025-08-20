@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $senha =password_hash($_POST['senha'],PASSWORD_DEFAULT);
     $id_perfil = $_POST['id_perfil'];
 
-    $sql = "INSERT INTO usuario(nome, email, senha, id_perfil) VALUES (:nome,:email,:senha,:id_perfil,)";
+    $sql = "INSERT INTO usuario(nome, email, senha, id_perfil) VALUES (:nome,:email,:senha,:id_perfil)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':nome', $nome);
     $stmt->bindParam(':email', $email);
@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $stmt->bindParam(':id_perfil', $id_perfil);
     
     if($stmt->execute()){
-        echo "<script>alert('Usuário cadastrado com sucesso!')</script>";
+        echo "<script>alert('Usuário cadastrado com sucesso!');</script>";
     } else {
-        echo "<script>alert('Erro ao cadastrar o usuário!')</script>";
+        echo "<script>alert('Erro ao cadastrar o usuário!');</script>";
     }
 }
 
@@ -65,7 +65,3 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
         <a href="principal.php">Voltar</a>
     </body>
 </html>
-
-
-<!--
-Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1 in C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php:24 Stack trace: #0 C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php(24): PDOStatement->execute() #1 {main} thrown in C:\xampp\htdocs\PROVA_RUANALVES\cadastro_usuario.php on line 24
