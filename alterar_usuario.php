@@ -11,24 +11,22 @@ if ($_SESSION['perfil'] != 1){
 
 // INICIALIZA AS VARIAVEIS
 $usuario = null;
-$busca = null; // <-- CORREÇÃO: inicialize $busca para evitar o warning
+$busca = null; 
 
 if ($_SERVER["REQUEST_METHOD"]=="POST" ){
-    if (!empty($_POST['busca_usuario'])) // <-- CORREÇÃO: nome correto do campo
+    if (!empty($_POST['busca_usuario'])) 
         $busca = trim($_POST['busca_usuario']);
 
     // VERIFICA SE A BUSCA É UM NUMERO (ID) OU UM NOME
-    if($busca !== null && is_numeric($busca)){ // <-- Garante que $busca está definida
+    if($busca !== null && is_numeric($busca)){ 
        $sql =  "SELECT * FROM usuario WHERE id_usuario = :busca";
        $stmt =$pdo->prepare($sql);
        $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
-    } elseif($busca !== null) { // <-- Garante que $busca foi preenchida
+    } elseif($busca !== null) { 
        $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome";
        $stmt =$pdo->prepare($sql);
        $stmt->bindValue(':busca_nome', "%$busca%", PDO::PARAM_STR);
     }
-
-    // Executa a consulta apenas se $stmt foi definido
     if (isset($stmt)) {
         $stmt->execute();
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" ){
     </form>
 
     <?php if ($usuario): ?>
-        <form:action="processa_alteracao_usuario.php" method="POST">
+        <form action="processa_alteracao_usuario.php" method="POST">
             <input type="hidden" name="id_usuario" value="<?=htmlspecialchars($usuario['id_usuario'])?>">
 
             <label for="nome">Nome:</label>
