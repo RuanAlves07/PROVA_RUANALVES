@@ -4,44 +4,43 @@ session_start();
 require_once 'conexao.php';
 
 // VERIFICA SE O USUARIO TEM PERMISSAO DE ADM
-
 if ($_SESSION['perfil'] != 1){
     echo"<script>alert('Acesso Negado');window.location.href='principal.php';</script>";
     exit;
 }
 
 // INICIALIZA AS VARIAVEIS
-
 $usuario = null;
-
+$busca = null; // <-- CORREÇÃO: inicialize $busca para evitar o warning
 
 if ($_SERVER["REQUEST_METHOD"]=="POST" ){
-    if (!empty($_POST['buscar_usuario']))
-    $busca = trim($_POST['buscar_usuario']);
-    
+    if (!empty($_POST['busca_usuario'])) // <-- CORREÇÃO: nome correto do campo
+        $busca = trim($_POST['busca_usuario']);
+
     // VERIFICA SE A BUSCA É UM NUMERO (ID) OU UM NOME
-   
-    if(is_numeric($busca)){
+    if($busca !== null && is_numeric($busca)){ // <-- Garante que $busca está definida
        $sql =  "SELECT * FROM usuario WHERE id_usuario = :busca";
        $stmt =$pdo->prepare($sql);
        $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
-    } else {
+    } elseif($busca !== null) { // <-- Garante que $busca foi preenchida
        $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome";
        $stmt =$pdo->prepare($sql);
        $stmt->bindValue(':busca_nome', "%$busca%", PDO::PARAM_STR);
     }
-    $stmt->execute();
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // SE O USUARIO NÃO FOR ENCONTRADO, EXIBE UM ALERTA 
+    // Executa a consulta apenas se $stmt foi definido
+    if (isset($stmt)) {
+        $stmt->execute();
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$usuario) {
-        echo"<script>alert('Usuário não encontrado');</script>";
+        // SE O USUARIO NÃO FOR ENCONTRADO, EXIBE UM ALERTA 
+        if (!$usuario) {
+            echo"<script>alert('Usuário não encontrado');</script>";
+        }
     }
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
