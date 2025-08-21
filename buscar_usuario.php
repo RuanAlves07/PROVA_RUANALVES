@@ -114,7 +114,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     </form>
 
     <?php if(!empty($usuarios)):?>
-        <table border="1"> 
+        <center><table border="1"> 
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
@@ -135,11 +135,11 @@ $opcoes_menu = $permissoes[$id_perfil];
                     </td> 
                 </tr>
             <?php endforeach; ?>
-        </table>
+        </table></center>
     <?php else: ?>
         <p> Nenhum usuário encontrado.</p>
     <?php endif; ?>
-    
+    <br>
     <a href="principal.php">Voltar</a>
 
 </body>
