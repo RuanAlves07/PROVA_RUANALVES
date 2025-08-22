@@ -110,7 +110,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             <input type="text" id="endereco" name="endereco" required>
 
             <label for="telefone">Telefone:</label>
-            <input type="text" id="telefone" name="telefone" required>
+            <input type="text" id="telefone" name="telefone" required onkeyup="ValidarTelefoneQntd()">
             
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>

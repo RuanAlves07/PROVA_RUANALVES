@@ -78,6 +78,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="validacoes.js"></script>
     <script src="scripts.js"></script>
 </head>
     <body>
@@ -102,13 +103,13 @@ $opcoes_menu = $permissoes[$id_perfil];
         <center><h2>Cadastrar Usuário</h2></center>
         <form action="cadastro_usuario.php" method="POST">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" id="nome" name="nome" required onkeyup="ValidarNumeroNome()">
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <input type="password" id="senha" name="senha" required onkeyup="ValidarSenha()">
 
             <label for="id_perfil">Perfil:</label>
             <select id="id_perfil" name="id_perfil">
@@ -119,7 +120,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             </select>
             
             <br>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" >Salvar</button>
             <br>
             <button type="reset" class="btn btn-primary">Cancelar</button>
         </form>
