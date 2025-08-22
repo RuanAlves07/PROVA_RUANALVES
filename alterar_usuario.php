@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" ){
     } elseif($busca !== null) { 
        $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome";
        $stmt =$pdo->prepare($sql);
-       $stmt->bindValue(':busca_nome', "%$busca%", PDO::PARAM_STR);
+       $stmt->bindValue(':busca_nome', "$busca%", PDO::PARAM_STR);
     }
     if (isset($stmt)) {
         $stmt->execute();
@@ -86,6 +86,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar usuário</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <!-- CERTIFIQUE-SE DE QUE O JAVASCRIPT ESTÁ SENDO CARREGADO CORRETAMENTE  -->
      <script src="scripts.js"></script>
 </head>
@@ -108,7 +109,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             </ul>
         </nav>
 
-        <h2>Alterar de Usuários</h2>
+        <center><h2>Alterar de Usuários</h2></center>
 
     <!-- FORMULARIO PARA ALTERAR USUARIOS -->
 
@@ -116,7 +117,7 @@ $opcoes_menu = $permissoes[$id_perfil];
         <label for="busca_usuario">Digite o ID ou NOME do usuário:</label>
         <input type="text" id="busca_usuario" name="busca_usuario" required onkeyup="buscarSugestoes()">
         <div id="sugestoes"></div>
-        <button type="submit">Buscar</button>
+        <button type="submit" class="btn btn-primary" >Buscar</button>
     </form>
 
     <?php if ($usuario): ?>
@@ -143,15 +144,12 @@ $opcoes_menu = $permissoes[$id_perfil];
                 <label for="nova_senha">Nova senha:</label>
                 <input type="password" id="nova_senha" name="nova_senha">
             <?php endif; ?>
-            <button type="submit">Alterar</button>
-            <button type="reset">Cancelar</button>       
+            <button type="submit" class="btn btn-primary" >Alterar</button>
+            <br>
+            <button type="reset" class="btn btn-primary" >Cancelar</button>       
         </form>
             <?php endif; ?>
-            <a href="principal.php">Voltar</a>
+            <center><a href="principal.php" class="btn btn-primary">Voltar</a></center>
     </body>
 </html>
 
-<!--
-Warning: Undefined variable $busca in C:\xampp\htdocs\PROVA_RUANALVES\alterar_usuario.php on line 24
-
-Warning: Undefined variable $busca in C:\xampp\htdocs\PROVA_RUANALVES\alterar_usuario.php on line 31-->

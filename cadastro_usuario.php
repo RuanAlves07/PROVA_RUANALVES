@@ -77,6 +77,8 @@ $opcoes_menu = $permissoes[$id_perfil];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="scripts.js"></script>
 </head>
     <body>
 
@@ -97,7 +99,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             </ul>
         </nav>
         
-        <h2>Cadastrar Usuário</h2>
+        <center><h2>Cadastrar Usuário</h2></center>
         <form action="cadastro_usuario.php" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
@@ -115,11 +117,13 @@ $opcoes_menu = $permissoes[$id_perfil];
                 <option value="3">Almoxarife</option>
                 <option value="4">Cliente</option>
             </select>
-
-            <button type="submit">Salvar</button>
-            <button type="reset">Cancelar</button>
+            
+            <br>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <br>
+            <button type="reset" class="btn btn-primary">Cancelar</button>
         </form>
 
-        <a href="principal.php">Voltar</a>
+        <center><a href="principal.php" class="btn btn-primary" >Voltar</a></center>
     </body>
 </html>

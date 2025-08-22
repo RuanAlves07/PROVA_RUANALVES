@@ -1,39 +1,32 @@
 <?php
-
 session_start();
 require_once 'conexao.php';
 
-// VERIFICA SE O USUARIO TEM PERMISSAO DE ADM
-if ($_SESSION['perfil'] != 1){
-    echo"<script>alert('Acesso Negado');window.location.href='principal.php';</script>";
-    exit;
+
+if ($_SESSION['perfil']!=1) {
+    echo "Acesso Negado";
+    exit();
 }
 
-// INICIALIZA AS VARIAVEIS
-$usuario = null;
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
+    $nome_fornecedor =$_POST['nome_fornecedor'];
+    $endereco =$_POST['endereco'];
+    $telefone =$_POST['telefone'];
+    $email = $_POST['email'];
+    $contato = $_POST['contato'];
 
-// BUSCA TODOS OS USUARIOS CADASTRADOS EM ORDEM ALFABETICA
-
-$sql = "SELECT * FROM usuario ORDER BY nome ASC";
-$stmt = $pdo->prepare($sql);
-$stmt -> execute();
-$usuarios = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-
-// SE UM ID FOR PASSADO VIA GET, EXCLUI O USUARIO 
-
-if (isset($_GET['id']) && is_numeric($_GET['id'])){
-    $id_usuario = $_GET['id'];
-
-    // EXCLUI O USUÁRIO DO BANCO DE DADOS
-
-    $sql = "DELETE FROM usuario WHERE id_usuario = :id";
+    $sql = "INSERT INTO fornecedor(nome_fornecedor, endereco, telefone, email, contato) VALUES (:nome_fornecedor,:endereco,:telefone,:email,:contato)";
     $stmt = $pdo->prepare($sql);
-    $stmt ->bindParam(':id', $id_usuario, PDO::PARAM_INT);
-
-    if ($stmt->execute()) {
-        echo"<script>alert('Usuário excluido com sucesso!');window.location.href='excluir_usuario.php';</script>";
+    $stmt->bindParam(':nome_fornecedor', $nome_fornecedor);
+    $stmt->bindParam(':endereco', $endereco);
+    $stmt->bindParam(':telefone', $telefone);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':contato', $contato);
+    
+    if($stmt->execute()){
+        echo "<script>alert('Fornecedor cadastrado com sucesso!');</script>";
     } else {
-        echo"<script>alert('Erro ao excluir o usuário!');</script>";
+        echo "<script>alert('Erro ao cadastrar o fornecedor!');</script>";
     }
 }
 
@@ -77,11 +70,10 @@ $permissoes = [
 
 $opcoes_menu = $permissoes[$id_perfil];
 
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -107,37 +99,31 @@ $opcoes_menu = $permissoes[$id_perfil];
                 <?php endforeach; ?>
             </ul>
         </nav>
+        
+        <center><h2>Cadastrar Fornecedor</h2></center>
+        <form action="cadastro_fornecedor.php" method="POST">
 
-        <center><h2>Excluir usuário</h2></center>
+            <label for="nome_fornecedor">Nome Fornecedor:</label>
+            <input type="text" id="nome_fornecedor" name="nome_fornecedor" required>
 
-        <?php if(!empty($usuarios)):?>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-            <center><table border="1" class="table table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Perfil</th>
-                    <th>Ações</th>
-                </tr>
-                <?php foreach($usuarios as $usuario):?>
-                    <tr>
-                        <td><?= htmlspecialchars($usuario['id_usuario'])?></td>
-                        <td><?= htmlspecialchars($usuario['nome'])?></td>
-                        <td><?= htmlspecialchars($usuario['email'])?></td>
-                        <td><?= htmlspecialchars($usuario['id_perfil'])?></td>
-                        <td>
-                            <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario']) ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-            </table></center>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required>
             
-                <?php else: ?>
-                    <p>Nenhum usuário encontrado!</p>
-                <?php endif; ?>
-                <br>
-                <center><a class="btn btn-primary" href="principal.php">Voltar</a></center>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contato">Contato:</label>
+            <input type="text" id="contato" name="contato" required>
+            
+            <br>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <br>
+            <button type="reset" class="btn btn-primary">Cancelar</button>
+        </form>
+
+        <center><a href="principal.php" class="btn btn-primary" >Voltar</a></center>
     </body>
 </html>
-

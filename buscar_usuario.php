@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" && !empty($_POST['busca'])){
  } else {
     $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome ORDER BY nome ASC";
     $stmt =$pdo->prepare($sql);
-    $stmt->bindValue(':busca_nome', "%$busca%", PDO::PARAM_STR);
+    $stmt->bindValue(':busca_nome', "$busca%", PDO::PARAM_STR);
  }
 } else{
     $sql = "SELECT * FROM usuario ORDER BY nome ASC";
@@ -83,6 +83,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Usuário</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <body>
 
@@ -103,18 +104,19 @@ $opcoes_menu = $permissoes[$id_perfil];
             </ul>
         </nav>
 
-    <h2>Lista de Usuários</h2>
+    <center><h2>Lista de Usuários</h2></center>
 
     <!-- FORMULARIO PARA BUSCAR USUARIOS -->
 
     <form action="buscar_usuario.php" method="POST">
         <label for="busca">Digite o ID ou NOME(opcional)</label>
         <input type="text" id="busca" name="busca">
-        <button type="submit">Pesquisar</button>
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
     </form>
 
     <?php if(!empty($usuarios)):?>
-        <center><table border="1"> 
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <center><table border="1" class="table table-bordered"> 
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
@@ -140,7 +142,7 @@ $opcoes_menu = $permissoes[$id_perfil];
         <p> Nenhum usuário encontrado.</p>
     <?php endif; ?>
     <br>
-    <a href="principal.php">Voltar</a>
+    <center><a href="principal.php" class="btn btn-primary" >Voltar</a></center>
 
 </body>
 </html>
