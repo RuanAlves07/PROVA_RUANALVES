@@ -93,6 +93,8 @@ $opcoes_menu = $permissoes[$id_perfil];
 </head>
     <body>
 
+
+
         <nav>
             <ul class="menu">
                 <?php foreach($opcoes_menu as $categoria=>$arquivos): ?>
@@ -150,6 +152,11 @@ $opcoes_menu = $permissoes[$id_perfil];
             <button type="reset" class="btn btn-primary" >Cancelar</button>       
         </form>
             <?php endif; ?>
+            <div class="logout">
+                <form action="logout.php" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+                </div>
             <center><a href="principal.php" class="btn btn-primary">Voltar</a></center>
     </body>
 </html>

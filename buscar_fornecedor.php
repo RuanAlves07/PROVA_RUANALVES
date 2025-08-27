@@ -87,6 +87,8 @@ $opcoes_menu = $permissoes[$id_perfil];
 </head>
 <body>
 
+
+
         <nav>
             <ul class="menu">
                 <?php foreach($opcoes_menu as $categoria=>$arquivos): ?>
@@ -146,6 +148,11 @@ $opcoes_menu = $permissoes[$id_perfil];
         <p> Nenhum fornecedor encontrado.</p>
     <?php endif; ?>
     <br>
+    <div class="logout">
+                <form action="logout.php" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+                </div>
     <center><a href="principal.php" class="btn btn-primary" >Voltar</a></center>
 
 </body>

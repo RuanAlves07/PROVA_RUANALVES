@@ -142,6 +142,11 @@ $opcoes_menu = $permissoes[$id_perfil];
         <p> Nenhum usuário encontrado.</p>
     <?php endif; ?>
     <br>
+    <div class="logout">
+                <form action="logout.php" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+                </div>
     <center><a href="principal.php" class="btn btn-primary" >Voltar</a></center>
 
 </body>
