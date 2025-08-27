@@ -86,6 +86,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar usuário</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="validacoes.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <!-- CERTIFIQUE-SE DE QUE O JAVASCRIPT ESTÁ SENDO CARREGADO CORRETAMENTE  -->
      <script src="scripts.js"></script>
@@ -121,7 +122,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     </form>
 
     <?php if ($usuario): ?>
-        <form action="processa_alteracao_usuario.php" method="POST">
+        <form action="processa_alteracao_usuario.php" method="POST" onsubmit="return validarUsuario();">
             <input type="hidden" name="id_usuario" value="<?=htmlspecialchars($usuario['id_usuario'])?>">
 
             <label for="nome">Nome:</label>

@@ -101,15 +101,15 @@ $opcoes_menu = $permissoes[$id_perfil];
         </nav>
         
         <center><h2>Cadastrar Usuário</h2></center>
-        <form action="cadastro_usuario.php" method="POST">
+        <form action="cadastro_usuario.php" method="POST" onsubmit="return validarUsuario();">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required onkeyup="ValidarNumeroNome()">
+            <input type="text" id="nome" name="nome" required>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required onkeyup="ValidarSenha()">
+            <input type="password" id="senha" name="senha" required>
 
             <label for="id_perfil">Perfil:</label>
             <select id="id_perfil" name="id_perfil">

@@ -103,7 +103,7 @@ $opcoes_menu = $permissoes[$id_perfil];
         </nav>
         
         <center><h2>Cadastrar Fornecedor</h2></center>
-        <form action="cadastro_fornecedor.php" method="POST">
+        <form action="cadastro_fornecedor.php" method="POST" onsubmit="return validarFornecedor();">
 
             <label for="nome_fornecedor">Nome Fornecedor:</label>
             <input type="text" id="nome_fornecedor" name="nome_fornecedor" required>
@@ -121,7 +121,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             <input type="text" id="contato" name="contato" required >
             
             <br>
-            <button type="submit" class="btn btn-primary" onkeypress="validarFornecedor()">Salvar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
             <br>
             <button type="reset" class="btn btn-primary">Cancelar</button>
         </form>
