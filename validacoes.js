@@ -1,7 +1,8 @@
-function validarFuncionario() {
-    let nome = document.getElementById("nome_funcionario").value;
+function validarFornecedor() {
+    let nome = document.getElementById("nome_fornecedor").value;
     let telefone = document.getElementById("telefone").value;
     let email = document.getElementById("email").value;
+    let contato = document.getElementById("contato").value;
 
     if (nome.length < 3) {
         alert("O nome do funcionário deve ter pelo menos 3 caracteres.");
@@ -20,23 +21,10 @@ function validarFuncionario() {
         return false;
     }
 
-    return true;
-}
-
-function ValidarNumeroNome(){
-    let nome = document.getElementById("nome").value;
-
-    nome = nome.replace(/[0-9]/g, "");
-    document.getElementById("nome").value = nome; 
-    return true;
-}
-
-function ValidarTelefoneQntd(){
-
-    let regexTelefone = /^[0-9]{10,11}$/;
-    if (!regexTelefone.test(telefone)) {
-        alert("Digite um telefone válido (10 ou 11 dígitos).");
-        return false;
+    if (contato.length < 3) {
+        alert("O nome do contato deve ter pelo menos 3 caracteres.")
     }
+
+    return true;
 }
 
